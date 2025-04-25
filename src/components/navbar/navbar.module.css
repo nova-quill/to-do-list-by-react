@@ -1,0 +1,17 @@
+.nav{
+  /* overflow-x: auto !important; */
+  scrollbar-width: none;
+}
+.nav li a{
+  font-size: 1.1rem;
+}
+/* .active{
+  color:red !important
+} */
+.search i{
+  /* color:red; */
+  right: .6rem;
+}
+.search i{
+  /* color:blue; */
+}

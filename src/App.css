@@ -1,0 +1,130 @@
+body {
+  min-height: 100vh;
+}
+:root {
+  --main-color: #d3c0a0;
+  --hover-color: #d6cbb9;
+  --task-color: #88bdbc;
+  --task-hover: #5c9ea0;
+}
+/* start navbar */
+.nav {
+  scrollbar-width: none;
+}
+.scroll-width-none::-webkit-scrollbar {
+  display: none;
+}
+
+.nav li a.nav-link {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #4f4f4c !important;
+  font-size: 1.2rem;
+  border-bottom: 1px solid transparent;
+}
+.nav li a:hover {
+  color: #7d7979 !important;
+  border-bottom-color: rgb(110, 110, 110);
+}
+nav div .nav-link.active {
+  color: #7d7979 !important;
+  border-bottom-color: rgb(110, 110, 110);
+}
+nav div button.addCategory {
+  /* color: #d3c0a0; */
+  color: var(--main-color,#d3c0a0);
+}
+nav div button.addCategory:hover {
+  /* color: #d6cbb9; */
+  color: var(--hover-color,#d6cbb9);
+}
+nav div button.addCategoryMobile {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--main-color,#d3c0a0);
+  font-size: 0.8rem;
+  bottom: 1rem;
+  right: 1rem;
+}
+nav div button.addCategoryMobile:hover {
+  background-color:var(--hover-color,#d6cbb9);
+}
+nav div input.category {
+  color: #4f4f4c;
+  outline: none;
+}
+nav div span.plusCategory {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color:var(--main-color,#d3c0a0);
+}
+nav div span.plusCategory:hover {
+  background-color:var(--hover-color,#d6cbb9);
+  cursor: pointer;
+}
+/* end navbar */
+
+/* start header */
+header a.addTask {
+  color: #88bdbc;
+  color: var(--task-color,#88bdbc);
+  border-bottom-color: var(--task-color,#88bdbc)!important;
+  text-decoration: none;
+}
+header a.addTask:hover {
+  color: var(--task-hover,#5c9ea0);
+  border-bottom-color: var(--task-hover,#5c9ea0) !important;
+}
+
+header div a.addTaskMobile {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--task-color,#88bdbc);
+  font-size: 0.8rem;
+  bottom: 1rem;
+  left: 1rem;
+}
+header div a.addTaskMobile:hover {
+  background-color: var(--task-hover,#5c9ea0);
+}
+header form input.form-control:focus {
+  box-shadow: 0px 4px 8px #dae1e9 !important;
+  border: none;
+}
+header form i {
+  right: 1rem;
+  color: #888;
+}
+header form button {
+  border-color: #3384db !important;
+  color: #3384db !important;
+}
+header div.dropdown .buttonDrop:hover {
+  color: gray;
+}
+/* end header */
+
+/* start part tasks in home */
+.container .card .card-body .form-check-input:checked {
+  background-color: #b6b5b5 !important;
+}
+.container .card .card-body .form-check label {
+  font-size: 1.2rem !important;
+}
+.container .card .card-body .priority {
+  background-color: #f9e498;
+}
+.container .card .card-body .edit:hover {
+  color: #4f4f4c !important;
+  cursor: pointer;
+  /* color:blue !important; */
+  /* background-color: red; */
+}
+.container .card .card-body .delete {
+  color: #f38181;
+}
+
+.container .card .card-body .delete:hover {
+  color: red !important;
+  cursor: pointer;
+}
