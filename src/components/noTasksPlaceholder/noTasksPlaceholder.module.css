@@ -1,0 +1,9 @@
+.addTaskInPlace {
+  color: white;
+  background-color: var(--task-hover);
+  border-color: var(--task-hover);
+}
+.addTaskInPlace:hover {
+  background-color: var(--task-color);
+  border-color: var(--task-color);
+}

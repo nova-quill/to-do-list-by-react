@@ -1,18 +1,19 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
-import Navbar from './components/navbar/Navbar'
 import Layout from './components/layout/Layout'
-import Footer from './components/footer/Footer'
 import AllTasks from './components/allTasks/AllTasks'
+import FormAddOrEditeTask from './features/taskForm/FormAddOrEditeTask'
+import FilterTasks from './components/FilterTasks/FilterTasks'
+
+
 const router=createBrowserRouter([
   {path:'',element:<Layout/>,children:[
-    {path:'/',element:<AllTasks/>},
-    {path:'/personal',element:<Footer/>},
-    {path:'/study',element:<Footer/>},
-    {path:'/tarfeh',element:<Footer/>},
-    {path:'/shopping',element:<Footer/>}
+    // {path:'/:namePage',element:<AllTasks/>},
+    // {path:'/',element:<AllTasks/>},
 
-
+      {path:'/:namePage',element:<FilterTasks/>},
+    {path:'/',element:<FilterTasks/>},
+    {path:'/taskFormAdd',element:<FormAddOrEditeTask/>},
   ]}
 ])
 

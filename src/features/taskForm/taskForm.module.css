@@ -1,0 +1,30 @@
+@media (min-width:1200px) {
+  .formTask{
+    max-width: 1000px;
+  }
+  }
+  .saveTask{
+    background-color: var(--task-color);
+  }
+  .saveTask:hover{
+    background-color: var(--task-hover);
+  }
+  .containerCancelEdite{
+    width: 1.3rem;
+    height: 1.3rem;
+    top:.5rem;
+    right: .5rem;
+    /* background-color: red; */
+
+  }
+
+  .containerCancelEdite:hover{
+    background-color: red !important;
+    cursor: pointer;
+  }
+  .cancelEdite:hover{
+    
+    /* width: 20px;
+    height: 20px; */
+    /* color: green; */
+  }

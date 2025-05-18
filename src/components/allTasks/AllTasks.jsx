@@ -1,19 +1,144 @@
-import React from "react";
-import CardTask from "../cardTask/CardTask";
-export default function AllTasks() {
+// import React from "react";
+// import CardTask from "../cardTask/CardTask";
+// import FormAddOrEditeTask from "../../features/taskForm/FormAddOrEditeTask";
+
+// export default function AllTasks({
+//   isEditing,
+//   setIsEditing,
+//   editingTaskId,
+//   setEditingTaskId,
+//   editTask,
+//   deleteTask,
+//   checkInputRefs,
+//   handleCheck,
+//   tasks,
+//   title,
+// }) {
+//   if (!tasks || tasks.length === 0) return null;
+
+//   return (
+//     <>
+//       <div className="mb-5 mt-4">
+//         <h6 className="text-secondary mb-4 text-capitalize">{title}</h6>
+//         {tasks.map((task) => (
+//           <React.Fragment key={task.id}>
+//             {editingTaskId === task.id ? (
+//               <FormAddOrEditeTask
+//                 isEditing={isEditing}
+//                 setIsEditing={setIsEditing}
+//                 editingTaskId={editingTaskId}
+//                 setEditingTaskId={setEditingTaskId}
+//               />
+//             ) : (
+//               <CardTask
+//                 task={task}
+//                 editTask={editTask}
+//                 deleteTask={deleteTask}
+//                 // checkInputRef={checkInputRef}
+//                                 checkInputRefs={(el)=>checkInputRefs.current[task.id]=el}
+
+//                 handleCheck={handleCheck}
+//               />
+//             )}
+//           </React.Fragment>
+//         ))}
+//       </div>
+//     </>
+//   );
+// }
+
+import React, { useContext } from "react";
+import {CardTask} from "../cardTask/CardTask";
+import FormAddOrEditeTask from "../../features/taskForm/FormAddOrEditeTask";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { tasksListContext } from "../../context/TasksProvider";
+import { saveToLocal } from "../../utils/storage";
+import { TASKS_LIST_KEY } from "../../utils/constants";
+
+export default function AllTasks({
+  isEditing,
+  setIsEditing,
+  editingTaskId,
+  setEditingTaskId,
+  editTask,
+  deleteTask,
+  checkInputRefs,
+  handleCheck,
+  tasks,
+  title,
+}) {
+  const { tasksList, setTasksList } = useContext(tasksListContext);
+
+
+
+ const handleDragEnd = (result) => {
+  if(!result.destination) return
+  const items=[...tasks];
+  console.log(items)
+
+  const[moveItem]=items.splice(result.source.index,1)
+  items.splice(result.destination.index,0,moveItem)
+  
+  setTasksList((prev)=>{
+    const otherTasks=prev.filter((task)=>!tasks.some((t)=>t.id===task.id))
+    const newList=[...otherTasks,...items];
+  saveToLocal(TASKS_LIST_KEY,newList)
+
+    return newList
+  });
+  console.log(items)
+ }
+
+
+
+  if (!tasks || tasks.length === 0) return null;
+
   return (
     <>
-      <div className="container">
-        <h4 className="text-capitalize mb-3">today's tasks</h4>
-        <CardTask />
-        <CardTask />
-        <CardTask />
-        </div>
-        <div className="container mt-4">
-        <h4 className="text-capitalize mb-3">other tasks</h4>
-        <CardTask />
-        <CardTask />  <CardTask />  <CardTask />
-      </div>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="tasks">
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="mb-5 mt-4"
+            >
+              <h6 className="text-secondary mb-4 text-capitalize">{title}</h6>
+              {tasks.map((task,index) => (
+                <React.Fragment key={task.id}>
+                  {editingTaskId === task.id ? (
+                    <FormAddOrEditeTask
+                      isEditing={isEditing}
+                      setIsEditing={setIsEditing}
+                      editingTaskId={editingTaskId}
+                      setEditingTaskId={setEditingTaskId}
+                    />
+                  ) : (
+                    <Draggable draggableId={task.id} index={index}>
+                      {(provided) => (
+                        <CardTask
+                          ref={provided.innerRef}
+                          {...provided.dragHandleProps}
+                          {...provided.draggableProps}
+                          task={task}
+                          editTask={editTask}
+                          deleteTask={deleteTask}
+                          // checkInputRef={checkInputRef}
+                          checkInputRefs={(el) =>
+                            (checkInputRefs.current[task.id] = el)
+                          }
+                          handleCheck={handleCheck}
+                        />
+                      )}
+                    </Draggable>
+                  )}
+                </React.Fragment>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </>
   );
 }
