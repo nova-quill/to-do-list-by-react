@@ -1,19 +1,10 @@
-import React ,{ forwardRef }from "react";
+import React, { forwardRef } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-// import CardTask from './CardTask';
 
-// export default function CardTask({
-//   task,
-//   editTask,
-//   deleteTask,
-//   checkInputRefs,
-//   handleCheck,
-// }) {
-
- export const CardTask=forwardRef(function CardTask({
-task, editTask, deleteTask, checkInputRefs, handleCheck ,...props
-
-},ref){
+export const CardTask = forwardRef(function CardTask(
+  { task, editTask, deleteTask, checkInputRefs, handleCheck, ...props },
+  ref
+) {
   const priorityClasses = {
     low: "bg-success-subtle   ",
     medium: "bg-warning-subtle ",
@@ -21,7 +12,11 @@ task, editTask, deleteTask, checkInputRefs, handleCheck ,...props
   };
   const priorityClass = priorityClasses[task.priority?.toLowerCase()] || "";
   return (
-    <div ref={ref} {...props} className="card mb-3 border-light shadow-sm text-break">
+    <div
+      ref={ref}
+      {...props}
+      className="card mb-3 border-light shadow-sm text-break"
+    >
       <div className="card-body p-2 p-md-3 d-flex justify-content-between align-items-center ">
         <div>
           <div className="form-check">
@@ -70,11 +65,12 @@ task, editTask, deleteTask, checkInputRefs, handleCheck ,...props
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-md-between align-items-center flex-column flex-md-row ms-2 gap-3 ">
+        <div className="d-flex justify-content-md-between align-items-center flex-column flex-md-row ms-2 gap-3 z-3">
           <button
-            className="edit btn btn-sm p-0  text-secondary  bg-transparent border-0"
+            className="edit btn btn-sm p-0  text-secondary  bg-transparent border-0 "
             aria-label="Edit Task"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation
               editTask(task.id, task.choose_Category);
             }}
           >
@@ -83,7 +79,9 @@ task, editTask, deleteTask, checkInputRefs, handleCheck ,...props
           <button
             className="delete btn btn-sm p-0  bg-transparent border-0"
             aria-label="Delete Task"
-            onClick={() => deleteTask(task.id)}
+            onClick={(e) => {
+                e.stopPropagation
+              deleteTask(task.id)}}
           >
             <FaTrash />
           </button>
@@ -91,5 +89,4 @@ task, editTask, deleteTask, checkInputRefs, handleCheck ,...props
       </div>
     </div>
   );
-}
-)
+});

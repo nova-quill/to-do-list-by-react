@@ -40,7 +40,6 @@ export default function SearchBox() {
       inputValue={inputValue}
       onInputChange={handleInputChange}
       disablePortal
-      // noOptionsText="لا توجد نتائج مطابقة"
       onKeyDown={(e) => {
         if (e.key === "Escape") {
           setInputValue("");

@@ -10,9 +10,7 @@ function getTodayDate(date = null) {
 }
 
 export default function useFilteredTasks(tasks, filters) {
-
-
- const {
+  const {
     currentCategory,
     showCompleted,
     showPriority,

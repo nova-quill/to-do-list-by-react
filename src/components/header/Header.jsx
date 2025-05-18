@@ -6,10 +6,14 @@ import { FilterPriorityContext } from "../../context/ShowPriorityProvider";
 import { FilterDueDateContext } from "../../context/ShowDueDateProvider";
 
 import SearchBox from "../../context/SearchBox";
+import { tasksListContext } from "../../context/TasksProvider";
+
 export default function Header() {
   const { showCompleted, setShowCompleted } = useContext(TaskFilterContext);
   const { showPriority, setShowPriority } = useContext(FilterPriorityContext);
   const { showDueDate, setShowDueDate } = useContext(FilterDueDateContext);
+  const { tasksList} = useContext(tasksListContext);
+
   const capitalizeFirst = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
@@ -20,7 +24,6 @@ export default function Header() {
         : showCompleted
         ? "Completed"
         : "Incompleted";
-        console.log(showCompleted)
 
     const priority = showPriority ? capitalizeFirst(showPriority) : "All";
     const dueDate = showDueDate ? capitalizeFirst(showDueDate) : "All";
@@ -57,208 +60,221 @@ export default function Header() {
           <div className="flex-fill">
             <SearchBox />
           </div>
+          {tasksList.length > 0 ? (
+            <div className="dropdown ">
+              <button
+                className="btn btn-sm dropdown-toggle "
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-bs-auto-close="outside"
+              >
+                {filterLabel}
+              </button>
 
-          <div className="dropdown ">
-            <button
-              className="btn btn-sm dropdown-toggle "
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              data-bs-auto-close="outside"
-            >
-              {filterLabel}
-            </button>
+              <ul className="dropdown-menu px-2 py-2">
+                <li className="dropdown-header fw-bold text-uppercase text-muted ">
+                  Status
+                </li>
 
-            <ul className="dropdown-menu px-2 py-2">
-              <li className="dropdown-header fw-bold text-uppercase text-muted ">
-                Status
-              </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        null,
+                        setShowCompleted,
+                        "showCompleted"
+                      )
+                    }
+                  >
+                    All
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        true,
+                        setShowCompleted,
+                        "showCompleted"
+                      )
+                    }
+                  >
+                    Completed
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        false,
+                        setShowCompleted,
+                        "showCompleted"
+                      )
+                    }
+                  >
+                    Incompleted
+                  </span>
+                </li>
 
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      null,
-                      setShowCompleted,
-                      "showCompleted"
-                    )
-                  }
-                >
-                  All
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      true,
-                      setShowCompleted,
-                      "showCompleted"
-                    )
-                  }
-                >
-                  Completed
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      false,
-                      setShowCompleted,
-                      "showCompleted"
-                    )
-                  }
-                >
-                  Incompleted
-                </span>
-              </li>
+                <li>
+                  <hr className="dropdown-divider " />
+                </li>
 
-              <li>
-                <hr className="dropdown-divider " />
-              </li>
+                <li className="dropdown-header fw-bold text-uppercase text-muted ">
+                  Priority
+                </li>
 
-              <li className="dropdown-header fw-bold text-uppercase text-muted ">
-                Priority
-              </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        null,
+                        setShowPriority,
+                        "showPriority"
+                      )
+                    }
+                  >
+                    All
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        "high",
+                        setShowPriority,
+                        "showPriority"
+                      )
+                    }
+                  >
+                    High
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        "medium",
+                        setShowPriority,
+                        "showPriority"
+                      )
+                    }
+                  >
+                    Medium
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        "low",
+                        setShowPriority,
+                        "showPriority"
+                      )
+                    }
+                  >
+                    Low
+                  </span>
+                </li>
 
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(e, null, setShowPriority, "showPriority")
-                  }
-                >
-                  All
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      "high",
-                      setShowPriority,
-                      "showPriority"
-                    )
-                  }
-                >
-                  High
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      "medium",
-                      setShowPriority,
-                      "showPriority"
-                    )
-                  }
-                >
-                  Medium
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      "low",
-                      setShowPriority,
-                      "showPriority"
-                    )
-                  }
-                >
-                  Low
-                </span>
-              </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
 
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
+                <li className="dropdown-header fw-bold text-uppercase text-muted ">
+                  Due Date
+                </li>
 
-              <li className="dropdown-header fw-bold text-uppercase text-muted ">
-                Due Date
-              </li>
-
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(e, null, setShowDueDate, "showDueDate")
-                  }
-                >
-                  All
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      "today",
-                      setShowDueDate,
-                      "showDueDate"
-                    )
-                  }
-                >
-                  Today
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(e, "Past", setShowDueDate, "showDueDate")
-                  }
-                >
-                  Past
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      "Upcoming",
-                      setShowDueDate,
-                      "showDueDate"
-                    )
-                  }
-                >
-                  Upcoming
-                </span>
-              </li>
-              <li>
-                <span
-                  className="dropdown-item"
-                  onClick={(e) =>
-                    handleFilterChange(
-                      e,
-                      "No Date",
-                      setShowDueDate,
-                      "showDueDate"
-                    )
-                  }
-                >
-                  No date
-                </span>
-              </li>
-            </ul>
-          </div>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(e, null, setShowDueDate, "showDueDate")
+                    }
+                  >
+                    All
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        "today",
+                        setShowDueDate,
+                        "showDueDate"
+                      )
+                    }
+                  >
+                    Today
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        "Past",
+                        setShowDueDate,
+                        "showDueDate"
+                      )
+                    }
+                  >
+                    Past
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        "Upcoming",
+                        setShowDueDate,
+                        "showDueDate"
+                      )
+                    }
+                  >
+                    Upcoming
+                  </span>
+                </li>
+                <li>
+                  <span
+                    className="dropdown-item"
+                    onClick={(e) =>
+                      handleFilterChange(
+                        e,
+                        "No Date",
+                        setShowDueDate,
+                        "showDueDate"
+                      )
+                    }
+                  >
+                    No date
+                  </span>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </header>
     </>

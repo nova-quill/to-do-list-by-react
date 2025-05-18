@@ -24,7 +24,6 @@ export default function Navbar() {
   const isAddTaskPage = location.pathname === "/taskFormAdd";
   const navigate = useNavigate();
   // start functions
-  // localStorage.clear();
 
   const addCategory = useCallback(() => {
     const categoryValue = newCategory.trim();
@@ -49,7 +48,7 @@ export default function Navbar() {
     navigate,
   ]);
 
-  const handleChangeCategory = ( typecategory) => {
+  const handleChangeCategory = (typecategory) => {
     setCurrentCategory(typecategory);
   };
 
@@ -92,15 +91,12 @@ export default function Navbar() {
                   key={category}
                   className={`nav-item  mx-2 `}
                   onClick={() => {
-                    handleChangeCategory( category);
+                    handleChangeCategory(category);
                   }}
                 >
                   <NavLink
                     to={`/${category}`}
-                    className='nav-link link-body-emphasis px-2 text-nowrap'
-                    // className={`nav-link link-body-emphasis px-2 text-nowrap ${
-                    //   currentCategory === category ? "" : ""
-                    // }`}
+                    className="nav-link link-body-emphasis px-2 text-nowrap"
                     aria-current="page"
                   >
                     {category}

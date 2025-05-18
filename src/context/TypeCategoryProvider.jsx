@@ -6,11 +6,14 @@ import { initCurrentCategoryFromLocal } from "../utils/storage";
 export const CurrentCategoryContext = createContext();
 
 export default function TypeCategoryProvider({ children }) {
-  const [currentCategory , setCurrentCategory] = useState(()=>initCurrentCategoryFromLocal());
-  // const [currentCategory , setCurrentCategory] = useState(null);
+  const [currentCategory, setCurrentCategory] = useState(() =>
+    initCurrentCategoryFromLocal()
+  );
 
   return (
-    <CurrentCategoryContext.Provider value={{ currentCategory , setCurrentCategory}}>
+    <CurrentCategoryContext.Provider
+      value={{ currentCategory, setCurrentCategory }}
+    >
       {children}
     </CurrentCategoryContext.Provider>
   );
