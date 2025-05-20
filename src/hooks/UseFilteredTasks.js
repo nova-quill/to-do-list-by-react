@@ -39,7 +39,7 @@ export default function useFilteredTasks(tasks, filters) {
       if (showDueDate === "No Date") return task.dueDate === "";
       return true;
     });
-    const namePage = tasks.filter(
+    const namePage = currentCategory==='all'?tasks:tasks.filter(
       (task) => task.choose_Category === currentCategory
     );
 

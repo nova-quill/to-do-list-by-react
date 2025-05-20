@@ -36,7 +36,12 @@ export default function FormAddOrEditeTask({
     taskDescription: "",
     dueDate: "",
     priority: "",
-    choose_Category: getFromLocal(CURRENT_CATEGORY_KEY) || "all",
+    choose_Category:
+      getFromLocal(CURRENT_CATEGORY_KEY, true) === "all"
+        ? "personal"
+        : getFromLocal(CURRENT_CATEGORY_KEY, true)??'personal',
+
+    // choose_Category: getFromSession(CURRENT_CATEGORY_KEY) || "all",
     isCompleted: false,
   };
 
@@ -72,14 +77,20 @@ export default function FormAddOrEditeTask({
   }, [setEditingTaskId]);
 
   const handleCategoryValue = () => {
-    const storedCategory = getFromLocal(CURRENT_CATEGORY_KEY);
-    inputCategory.current.value = storedCategory || "all";
+    const storedCategory = getFromLocal(CURRENT_CATEGORY_KEY, true);
+
+    inputCategory.current.value =
+      storedCategory === "all" ? "personal" : storedCategory;
+    // inputCategory.current.value = storedCategory ;
+    setCurrentCategory(inputCategory.current.value);
+
     taskTitleRef.current.focus();
   };
 
   const onChangeCategoryValue = (e) => {
     formik.handleChange(e);
     setCurrentCategory(e.target.value);
+    console.log(e.target.value);
   };
 
   useEffect(() => {

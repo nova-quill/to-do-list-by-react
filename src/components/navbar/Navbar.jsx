@@ -54,11 +54,20 @@ export default function Navbar() {
 
   // start effects
 
+  // useEffect(() => {
+  //   currentCategory === null
+  //     ? ""
+  //     : saveToLocal(CURRENT_CATEGORY_KEY, currentCategory);
+  // }, [currentCategory]);
+
+
   useEffect(() => {
     currentCategory === null
       ? ""
-      : saveToLocal(CURRENT_CATEGORY_KEY, currentCategory);
+      : sessionStorage.setItem(CURRENT_CATEGORY_KEY, currentCategory);
   }, [currentCategory]);
+
+
 
   useEffect(() => {
     const modal = modalRef.current;

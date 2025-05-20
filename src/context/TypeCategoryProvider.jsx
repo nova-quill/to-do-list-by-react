@@ -1,14 +1,20 @@
 import React from "react";
 import { createContext } from "react";
 import { useState } from "react";
-import { initCurrentCategoryFromLocal } from "../utils/storage";
+import { initCurrentCategoryFromSession } from "../utils/storage";
 
 export const CurrentCategoryContext = createContext();
 
 export default function TypeCategoryProvider({ children }) {
   const [currentCategory, setCurrentCategory] = useState(() =>
-    initCurrentCategoryFromLocal()
+    initCurrentCategoryFromSession()
   );
+
+  //   const [currentCategory, setCurrentCategory] = useState(null);
+  //   useEffect(()=>{
+  // setCurrentCategory( initCurrentCategoryFromLocal())
+  //   },[])
+
 
   return (
     <CurrentCategoryContext.Provider

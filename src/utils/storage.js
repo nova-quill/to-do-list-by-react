@@ -15,9 +15,10 @@ export const saveToLocal = (key, value) => {
   }
 };
 
-export const getFromLocal = (key) => {
+export const getFromLocal = (key,isLocal) => {
   try {
-    const data = localStorage.getItem(key);
+  const data =   isLocal?sessionStorage.getItem(key):
+    localStorage.getItem(key);
     try {
       return JSON.parse(data);
     } catch {
@@ -28,6 +29,23 @@ export const getFromLocal = (key) => {
     return null;
   }
 };
+
+// export const getFromSession = (key) => {
+//   try {
+//     const data = sessionStorage.getItem(key);
+//     try {
+//       return JSON.parse(data);
+//     } catch {
+//       return data;
+//     }
+//   } catch (error) {
+//     console.error("Error get from localStorage", error);
+//     return null;
+//   }
+// };
+
+
+
 
 export const removeFromLocal = (key) => {
   try {
@@ -43,9 +61,12 @@ export const initCategoriesFromLocal = () => {
     : ["all", "personal", "work", "study", "tarfeh", "shopping"];
 };
 
-export const initCurrentCategoryFromLocal = () => {
-  return getFromLocal(CURRENT_CATEGORY_KEY) || "all";
+export const initCurrentCategoryFromSession = () => {
+  return getFromLocal(CURRENT_CATEGORY_KEY,true) || "all";
 };
+// export const initCurrentCategoryFromLocal = () => {
+//   return getFromLocal(CURRENT_CATEGORY_KEY) ??'all';
+// };
 
 export const initTasksListFromLocal = () => {
   return getFromLocal(TASKS_LIST_KEY) || [];

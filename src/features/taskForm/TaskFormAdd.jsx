@@ -100,13 +100,23 @@ export default function TaskFormAdd({
               <option value="" disabled>
                 category
               </option>
-              {categories.map((category) => {
+              {/* {categories.map((category) => {
                 return (
                   <option key={category} value={category}>
                     {category}
                   </option>
                 );
+              })} */}
+
+                {categories.map((category,index) => {
+                return (
+                index>0?  <option key={category} value={category}>
+                    {category}
+                  </option>:''
+                );
               })}
+
+
             </select>
           </div>
 
