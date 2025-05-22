@@ -21,6 +21,7 @@ export default function AllTasks({
   const { setTasksList } = useContext(tasksListContext);
 
   const handleDragEnd = (result) => {
+
     if (!result.destination) return;
     const items = [...tasks];
 
@@ -43,12 +44,13 @@ export default function AllTasks({
   return (
     <>
       <DragDropContext onDragEnd={handleDragEnd}>
+
         <Droppable droppableId="tasks">
           {(provided) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className="mb-5 mt-4"
+              className="mb-5 mt-4 z-1"
             >
               <h6 className="text-secondary mb-4 text-capitalize">{title}</h6>
               {tasks.map((task, index) => (
