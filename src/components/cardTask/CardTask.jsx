@@ -73,7 +73,7 @@ export const CardTask = forwardRef(function CardTask(
               onTouchStart={(e) => {
     e.stopPropagation(); // تمنع انتقال الحدث
   }}
-            onClick={(e) => {
+            onClick={() => {
               // e.stopPropagation()
               //  e.preventDefault(); 
               editTask(task.id, task.choose_Category);
@@ -86,7 +86,7 @@ export const CardTask = forwardRef(function CardTask(
             className="delete btn btn-sm p-0  bg-transparent border-0"
                         type="button"
             aria-label="Delete Task"
-            onClick={(e) => {
+            onClick={() => {
                 // e.stopPropagation()
                 //  e.preventDefault(); 
               deleteTask(task.id)}}
