@@ -68,19 +68,27 @@ export const CardTask = forwardRef(function CardTask(
         <div className="d-flex justify-content-md-between align-items-center flex-column flex-md-row ms-2 gap-3 z-3">
           <button
             className="edit btn btn-sm p-0  text-secondary  bg-transparent border-0 "
+            type="button"
             aria-label="Edit Task"
+              onTouchStart={(e) => {
+    e.stopPropagation(); // تمنع انتقال الحدث
+  }}
             onClick={(e) => {
-              e.stopPropagation
+              // e.stopPropagation()
+              //  e.preventDefault(); 
               editTask(task.id, task.choose_Category);
+              
             }}
           >
             <FaEdit />
           </button>
           <button
             className="delete btn btn-sm p-0  bg-transparent border-0"
+                        type="button"
             aria-label="Delete Task"
             onClick={(e) => {
-                e.stopPropagation
+                // e.stopPropagation()
+                //  e.preventDefault(); 
               deleteTask(task.id)}}
           >
             <FaTrash />

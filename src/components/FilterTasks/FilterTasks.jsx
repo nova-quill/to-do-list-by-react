@@ -43,6 +43,7 @@ export default function FilterTasks() {
     (id) => {
       setEditingTaskId(id);
       setIsEditing(true);
+      console.log('mklk')
     },
     [setEditingTaskId, setIsEditing]
   );
