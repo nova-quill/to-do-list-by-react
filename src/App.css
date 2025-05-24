@@ -226,3 +226,9 @@ header div.dropdown .buttonDrop:hover {
   padding-inline: 2rem;
 }
 /* end Mui */
+
+
+/* input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  z-index: 100000;
+} */

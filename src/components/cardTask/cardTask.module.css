@@ -1,0 +1,24 @@
+.dropMore::after{
+display: none !important;
+}
+
+.listIcon,.listIcon li{
+  /* display: block !important; */
+  width: fit-content;
+  min-width: fit-content;
+  /* background-color: red; */
+}
+.shareIcon:hover{
+color:rgb(87, 85, 85) !important;
+/* background-color: red !important; */
+cursor: pointer;
+}
+.cardTask:hover div ul{
+  /* display: block !important; */
+}
+
+
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bd-violet-bg);
+  --bs-tooltip-color: var(--bs-white);
+}

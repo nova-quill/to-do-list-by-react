@@ -66,11 +66,17 @@ export default function TaskEditeForm({
                   onChange={formik.handleChange}
                 />
               </div>
+              {/* <div className="input-group">
+  <input type="date" className="form-control" />
+  <span className="input-group-text">
+    <i className="bi bi-calendar-event"></i>
+  </span>
+</div> */}
 
               <div className="">
                 <select
                   id="priority"
-                  className="form-select text-capitalize shadow-none border-light-subtle  w-100 w-sm-auto form-select-sm "
+                  className="form-select pe-1 text-capitalize shadow-none border-light-subtle  w-100 w-sm-auto form-select-sm "
                   name="priority"
                   value={formik.values.priority}
                   onChange={formik.handleChange}
